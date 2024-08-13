@@ -1,0 +1,109 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialBook</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://kit.fontawesome.com/71dbe680d0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static "posts/style.css" %}">
+
+</head>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <a href="{% url "post-home" %}">
+                <img src="{% static "posts/images/logo2.png" %}" class="logo">
+            </a>
+            <ul>
+                <li>
+                    <img src="{% static "posts/images/notification.png" %}">
+                </li>
+                <li>
+                    <img src="{% static "posts/images/inbox.png" %}">
+                </li>
+                <li>
+                    <img src="{% static "posts/images/video.png" %}">
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <div class="search-box">
+                <img src="{% static "posts/images/search.png" %}">
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="nav-user-icon online" onclick="settingsMenuToogle()">
+                <img src="{% static "posts/images/profile-pic.png" %}">
+            </div>
+
+        </div>
+        <!-- ---------------------settings menu user dropdown-------------- -->
+
+        <div class="settings-menu">
+
+            <div id="dark-btn">
+                <span></span>
+            </div>
+
+            <div class="settings-menu-inner">
+                <div class="user-profile">
+                    <img src="{% static "posts/images/profile-pic.png" %}">
+                    <div>
+                        <p>John Nicholson</p>
+                        <a href="profile.html">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile">
+                    <img src="{% static "posts/images/feedback.png" %}">
+                    <div>
+                        <p>Give Feedback</p>
+                        <a href="#">Help us to improve the new design</a>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="settings-links">
+                    <img src="{% static "posts/images/setting.png" %}" class="settings-icon">
+                    <a href="#">Settings & Privacy <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
+                </div>
+
+                <div class="settings-links">
+                    <img src="{% static "posts/images/help.png" %}" class="settings-icon">
+                    <a href="#">Help and Support <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
+                </div>
+
+                <div class="settings-links">
+                    <img src="{% static "posts/images/display.png" %}" class="settings-icon">
+                    <a href="#">Display & Accessibility <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
+                </div>
+
+                <div class="settings-links">
+                    <img src="{% static "posts/images/logout.png" %}" class="settings-icon">
+                    <a href="#">Logout <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+    </nav>
+    {% block content %}
+    
+    {% endblock content %}
+
+    <div class="footer">
+        <p>Copyright 2024 - Lakshya Pachkhede</p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="{% static "posts/index.js" %}"></script>
+    <script src="{% static "posts/slider.js" %}"></script>
+</body>
+
+</html>

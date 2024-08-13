@@ -1,0 +1,210 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+
+<div class="main">
+    {% comment %} <!-- ---------------------Left Sidebar----------------------- --> {% endcomment %}
+    <div class="left-sidebar">
+        <div class="imp-links">
+            <a href="#"><img src="{% static "posts/images/news.png" %}"> Latest News</a>
+            <a href="#"><img src="{% static "posts/images/friends.png" %}"> Friends</a>
+            <a href="#"><img src="{% static "posts/images/group.png" %}"> Group</a>
+            <a href="#"><img src="{% static "posts/images/marketplace.png" %}"> Marketplace</a>
+            <a href="#"><img src="{% static "posts/images/watch.png" %}"> Watch</a>
+            <a href="#">See More</a>
+        </div>
+
+        <div class="shortcut-links">
+            <p>Your Shortcuts</p>
+            <a href="#"><img src="{% static "posts/images/shortcut-1.png" %}"> Web Developers</a>
+            <a href="#"><img src="{% static "posts/images/shortcut-2.png" %}"> Web Design course</a>
+            <a href="#"><img src="{% static "posts/images/shortcut-3.png" %}"> Full Stack Development</a>
+            <a href="#"><img src="{% static "posts/images/shortcut-4.png" %}"> Website Experts</a>
+        </div>
+
+    </div>
+
+    {% comment %} <!-- ---------------------Main Content----------------------- --> {% endcomment %}
+    <div class="main-content">
+
+
+        <div class="story-gallery">
+            <div class="story story1">
+                <img src="{% static "posts/images/upload.png" %}">
+                <p>Post Story</p>
+            </div>
+            <div class="story story2">
+                <img src="{% static "posts/images/member-1.png" %}">
+                <p>Alison</p>
+            </div>
+            <div class="story story3">
+                <img src="{% static "posts/images/member-2.png" %}">
+                <p>Jackson</p>
+            </div>
+            <div class="story story4">
+                <img src="{% static "posts/images/member-3.png" %}">
+                <p>Samona</p>
+            </div>
+            <div class="story story5">
+                <img src="{% static "posts/images/member-4.png" %}">
+                <p>John Doe</p>
+            </div>
+
+        </div>
+
+        <div class="write-post-container ">
+            <div class="user-profile">
+                <img src="{% static "posts/images/profile-pic.png" %}">
+                <div>
+                    <p>John Nicholson</p>
+                    <small>Public <i class="fas fa-caret-down"></i></small>
+                </div>
+            </div>
+
+
+            <div class="post-input-container">
+                <textarea rows="3" placeholder="What's on your mind, John?"></textarea>
+                <div class="add-post-links">
+                    <a href="#"><img src="{% static "posts/images/live-video.png" %}"> Live Video</a>
+                    <a href="#"><img src="{% static "posts/images/photo.png" %}"> Photo Video</a>
+                    <a href="#"><img src="{% static "posts/images/feeling.png" %}"> Feeling/Activity</a>
+                </div>
+            </div>
+        </div>
+
+        {% for post in posts %}
+            <div class="post-container">
+
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="{% static "posts/images/profile-pic.png" %}">
+                        <div>
+                            <p>{{ post.author.username }}</p>
+                            {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
+                            <span>{{ post.date_posted|date:"F j, Y, h:i a" }}</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+
+
+                {% comment %} <p class="post-text">I will create this project in <span>@django</span> stay tuned for such types of
+                    projects <a href="#">#Easy Tutorials</a>
+                    <a href="#">#Django</a>
+                </p> {% endcomment %}
+                <a href="{% url "post-detail" post.pk %}" class="post-text"><p class="post-text">{{ post.caption|truncatewords:20 }}</p></a>
+
+                {% if post.images.all|length > 0 %}
+                {% comment %} <img src="images/feed-image-1.png" class="post-img"> {% endcomment %}
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                      
+                    {% for image in post.images.all %}
+                        <div class="swiper-slide"><img src="{{ image.image.url }}" class="post-img"></div>
+                    {% endfor %}
+
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+        
+
+                </div>
+                {% endif %}
+
+
+                <div class="post-row">
+                    <div class="activity-icons">
+                        <div><img src="{% static "posts/images/like.png" %}"> 120</div>
+                        <div><img src="{% static "posts/images/comments.png" %}"> 45</div>
+                        <div><img src="{% static "posts/images/share.png" %}"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="{% static "posts/images/profile-pic.png" %}"> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+                
+
+            </div>
+        {% endfor %}
+        <button type="button" class="load-more-button">Load More</button>
+
+
+
+    </div>
+
+    {% comment %} <!-- ---------------------Right Sidebar----------------------- --> {% endcomment %}
+    <div class="right-sidebar">
+        <div class="sidebar-title">
+            <h4>Events</h4>
+            <a href="#">See All</a>
+        </div>
+
+        <div class="event">
+            <div class="left-event">
+                <h3>18</h3>
+                <span>March</span>
+            </div>
+            <div class="right-event">
+                <h4>Social Media</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Willson Tech Park</p>
+                <a href="#">More Info</a>
+            </div>
+        </div>
+
+        <div class="event">
+            <div class="left-event">
+                <h3>22</h3>
+                <span>June</span>
+            </div>
+            <div class="right-event">
+                <h4>Mobile Marketing</h4>
+                <p><i class="fa-solid fa-location-dot"></i> Willson Tech Park</p>
+                <a href="#">More Info</a>
+            </div>
+        </div>
+
+        <div class="sidebar-title">
+            <h4>Advertisement</h4>
+            <a href="#">Close</a>
+        </div>
+        <img src="{% static "posts/images/advertisement.png" %}" class="sidebar-ads">
+
+        <div class="sidebar-title">
+            <h4>Conversation</h4>
+            <a href="#">Hide Chat</a>
+        </div>
+
+
+        <div class="online-list">
+            <div class="online">
+                <img src="{% static "posts/images/member-1.png" %}">
+            </div>
+            <p>Alison Mina</p>
+        </div>
+
+        <div class="online-list">
+            <div class="online">
+                <img src="{% static "posts/images/member-2.png" %}">
+            </div>
+            <p>Jackson Aston</p>
+        </div>
+
+        <div class="online-list">
+            <div class="online">
+                {% comment %} <!--use nav-user-icon for displaying user ofline and add online for showing online--> {% endcomment %}
+                <img src="{% static "posts/images/member-3.png" %}">
+            </div>
+            <p>Samona Rose</p>
+        </div>
+
+
+    </div>
+</div>
+
+
+{% endblock content %}

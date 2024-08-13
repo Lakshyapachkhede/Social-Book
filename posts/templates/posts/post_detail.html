@@ -1,0 +1,64 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<div class="post-container">
+
+    <div class="post-row">
+        <div class="user-profile">
+            <img src="{% static "posts/images/profile-pic.png" %}">
+            <div>
+                <p>{{ post.author.username }}</p>
+                {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
+                <span>{{ post.date_posted|date:"F j, Y, h:i a" }}</span>
+            </div>
+        </div>
+        <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+    </div>
+
+
+
+    {% comment %} <p class="post-text">I will create this project in <span>@django</span> stay tuned for such types of
+        projects <a href="#">#Easy Tutorials</a>
+        <a href="#">#Django</a>
+    </p> {% endcomment %}
+    <p class="post-text">{{ post.caption }}</p>
+
+    {% if post.images.all|length > 0 %}
+    {% comment %} <img src="images/feed-image-1.png" class="post-img"> {% endcomment %}
+    <div class="swiper">
+        <div class="swiper-wrapper">
+          
+        {% for image in post.images.all %}
+            <div class="swiper-slide"><img src="{{ image.image.url }}" class="post-img"></div>
+        {% endfor %}
+
+        </div>
+
+        <div class="swiper-pagination"></div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+
+    </div>
+    {% endif %}
+
+
+    <div class="post-row">
+        <div class="activity-icons">
+            <div><img src="{% static "posts/images/like.png" %}"> 120</div>
+            <div><img src="{% static "posts/images/comments.png" %}"> 45</div>
+            <div><img src="{% static "posts/images/share.png" %}"> 20</div>
+        </div>
+        <div class="post-profile-icon">
+            <img src="{% static "posts/images/profile-pic.png" %}"> <i class="fas fa-caret-down"></i>
+        </div>
+    </div>
+    
+
+</div>
+</div>
+
+{% endblock content %}
