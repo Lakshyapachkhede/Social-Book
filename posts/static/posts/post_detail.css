@@ -1,0 +1,86 @@
+.post-detail-container{
+    margin: 0;
+    flex-basis: 60%;
+}
+.post-comments-container{
+    flex-basis: 35%;
+
+}
+.comments-input{
+    padding-left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.comments-input i{
+    padding: 20px;
+}
+
+.comment-container{
+    margin: 0;
+    padding: 5px 0;
+    margin-top: 10px;
+}
+
+.hide-button{
+    background: transparent;
+    border: 0;
+}
+.d-none{
+    display: none;
+}
+
+.add-images-icon{
+    width: 20px;
+}
+
+
+.update-input textarea{
+    border-bottom: 0;
+}
+
+.post-input-buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.delete-button {
+    margin: auto;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid red;
+    color: #626262;
+    background: transparent;
+    border-radius: 4px;
+}
+.cancel-button{
+    margin: auto;
+    cursor: pointer;
+    padding: 5px 10px;
+    border: 1px solid #9a9a9a;
+    color: #626262;
+    background: transparent;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.mt-3{
+    margin-top: 3px;
+}
+
+@media (max-width:900px) {
+    .main{
+        flex-wrap: wrap;
+    }
+    .post-detail-container{
+        flex-basis: 100%;
+    }
+    .post-comments-container{
+        margin-top: 20px;
+        display: block;
+        flex-basis: 100%;
+    }
+}

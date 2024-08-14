@@ -6,10 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
     <title>SocialBook</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/71dbe680d0.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "posts/style.css" %}">
+    <link rel="stylesheet" href="{% static "posts/post_detail.css" %}">
 
 </head>
 
@@ -84,8 +87,10 @@
 
                 <div class="settings-links">
                     <img src="{% static "posts/images/logout.png" %}" class="settings-icon">
-                    <a href="#">Logout <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
+    
+                    <a href="{% url "logout" %}">Logout <img src="{% static "posts/images/arrow.png" %}" width="10px"></a>
                 </div>
+
 
 
             </div>
@@ -104,6 +109,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{% static "posts/index.js" %}"></script>
     <script src="{% static "posts/slider.js" %}"></script>
+    <script src="{% static "posts/likes.js" %}"></script>
+
 </body>
 
 </html>

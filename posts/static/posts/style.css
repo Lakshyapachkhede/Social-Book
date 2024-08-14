@@ -373,7 +373,7 @@ nav {
 
 }
 
-.add-post-links a {
+.add-post-links a, a button{
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -383,7 +383,7 @@ nav {
 
 }
 
-.add-post-links a img {
+.add-post-links a img, .add-post-links a button i {
     width: 20px;
     margin-right: 10px;
 
@@ -529,7 +529,7 @@ nav {
 
 }
 
-.settings-links a {
+.settings-links a, button {
     display: flex;
     flex: 1;
     align-items: center;
@@ -769,6 +769,12 @@ nav {
 .swiper-slide img{
     width: 100%;
 
+}
+
+.blue-link{
+    color: #1876f2;
+    font-size: 12px;
+    text-decoration: none;
 }
 
 /* ----------------- media query for home page --------------------- */

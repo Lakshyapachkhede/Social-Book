@@ -64,12 +64,17 @@
 
 
             <div class="post-input-container">
-                <textarea rows="3" placeholder="What's on your mind, John?"></textarea>
+                <form method="post" enctype="multipart/form-data" action={% url "post-create" %}>
+                    {% csrf_token %}
+                <textarea rows="3" name="caption" placeholder="What's on your mind, {{ user.username }}?"></textarea>
                 <div class="add-post-links">
-                    <a href="#"><img src="{% static "posts/images/live-video.png" %}"> Live Video</a>
-                    <a href="#"><img src="{% static "posts/images/photo.png" %}"> Photo Video</a>
-                    <a href="#"><img src="{% static "posts/images/feeling.png" %}"> Feeling/Activity</a>
+                    <a href="#"><img src="{% static "posts/images/live-video.png" %}"> Video</a>
+                    <a href="{% url "post-create" %}"><img src="{% static "posts/images/photo.png" %}"> Photo</a>
+                    {% comment %} <a href="#"><img src="{% static "posts/images/feeling.png" %}"> Feeling/Activity</a> {% endcomment %}
+                    <a><button class="hide-button" type="submit"><i class="fa-solid fa-paper-plane fa-lg" style="color: #1876f2;"></i>Post</button></a>
                 </div>
+                </form>
+    
             </div>
         </div>
 
@@ -119,13 +124,19 @@
 
                 <div class="post-row">
                     <div class="activity-icons">
-                        <div><img src="{% static "posts/images/like.png" %}"> 120</div>
-                        <div><img src="{% static "posts/images/comments.png" %}"> 45</div>
+                        <div id="like-section-{{post.id}}">
+                            {% if post|has_liked:user %}
+                                <img src="{% static "posts/images/like-blue.png" %}" id="like-icon-{{post.id}}" class="like-icon" data-liked="true">
+                            {% else %}
+                                <img src="{% static "posts/images/like.png" %}" id="like-icon-{{post.id}}" class="like-icon" data-liked="false">
+                            {% endif %}
+                            <span id="likes-count-{{post.id}}">{{ post.likes.count }}</span>
+                        </div>
+                                            
+                        <a href="{% url "post-detail" post.pk%}"><div><img src="{% static "posts/images/comments.png" %}">{{ post.comments.count }}</div></a>
                         <div><img src="{% static "posts/images/share.png" %}"> 20</div>
                     </div>
-                    <div class="post-profile-icon">
-                        <img src="{% static "posts/images/profile-pic.png" %}"> <i class="fas fa-caret-down"></i>
-                    </div>
+                    
                 </div>
                 
 
