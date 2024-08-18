@@ -1,7 +1,7 @@
 document.getElementById('id_images').addEventListener('change', function(event) {
     var files = event.target.files;
     var swiperWrapper = document.getElementById('swiper-wrapper');
-    swiperWrapper.innerHTML = ''; // Clear previous slides
+    swiperWrapper.innerHTML = '';
 
     for (var i = 0; i < files.length; i++) {
         var file = files[i];
@@ -15,7 +15,7 @@ document.getElementById('id_images').addEventListener('change', function(event) 
                 var img = document.createElement('img');
                 img.src = e.target.result;
                 img.className = 'post-img';
-                img.style.maxWidth = '100%'; // Make sure the image fits in the slide
+                img.style.maxWidth = '100%';
 
                 slide.appendChild(img);
                 swiperWrapper.appendChild(slide);

@@ -1,0 +1,92 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="profile-container">
+    <input class="d-none" type="file" id="cover-image" name="banner_image"/>
+
+    <div class="cover-image-container">
+        <label for="cover-image">
+            <img src="{{ profile.banner_image.url }}" class="cover-img-update" id="banner-image">
+            <div class="overlay">Change Image</div>
+        </label>
+    </div>
+
+    <div id="simpleModal" class="modal">
+
+
+        <div class="modal-content">
+            <h2>Crop Image</h2>
+            <div class="main-modal-container">
+                <div class="img-container">
+                    <img id="modal-image">
+                </div>
+                <button class="load-more-button closeBtn" id="btn-crop">Done</button>
+            </div>
+        </div>
+
+    </div>
+    <div class="profile-details">
+        <div class="pd-left">
+            <div class="pd-row">
+                
+                <input class="d-none" type="file" id="profile-image" name="user_image"/>
+                <img src="{{ profile.user_image.url }}" class="pd-image" id="user-image">
+            
+                <span class="change-profile-image-btn">
+                <label for="profile-image" >
+                        <img class="add-images-icon" src="{% static "posts/images/photo.png" %}">
+                </label>
+            </span>
+                <div>
+                    <h3>{{ profile.user.username }}</h3>
+                    <p>{{ profile.friends.count }} Friends {% if profile.user.username != user.username %}- {{ mutual_friends_count }} mutual{% endif %}</p>
+                    {% if profile.friends.count > 4 %}
+                    {% for friend in profile.friends.all|slice:"4" %}
+                    <img src="{{ friend.user_image.url }}">
+                    {% endfor %}
+                    {% else %}
+                    {% for friend in profile.friends.all %}
+                    <img src="{{ friend.user_image.url }}">
+                    {% endfor %}
+                    {% endif %}
+
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+
+
+    <div class="profile-details-input mt-14">
+
+            <ul>
+                <li><div><h3> Intro </h3></div><input class="profile-input" type="text" name="intro" value="{{ profile.intro }}"></li>
+                <li><div><img src="{% static "posts/images/profile-job.png" %}"> Works at </div><input class="profile-input" type="text" name="works" value="{{ profile.works }}"></li>
+                <li><div><img src="{% static "posts/images/profile-study.png" %}"> Studied at </div><input class="profile-input" type="text" name="education" value="{{ profile.education }}"></li>
+                <li><div><img src="{% static "posts/images/profile-location.png" %}"> Lives in </div><input class="profile-input" type="text" name="location" value="{{ profile.location }}"></li>
+                <li><div><img src="{% static "posts/images/profile-home.png" %}"> From </div><input class="profile-input" type="text" name="home" value="{{ profile.home }}"></li>
+            </ul>
+
+            <button type="submit" class="load-more-button">Update</button>
+
+
+    </div>
+
+
+
+    <script src="{% static "users/profile_form.js" %}"></script>
+</div>
+</form>
+
+
+{% endblock content %}

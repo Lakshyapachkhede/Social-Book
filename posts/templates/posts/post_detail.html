@@ -8,14 +8,25 @@
 
     <div class="post-row">
         <div class="user-profile">
-            <img src="{% static "posts/images/profile-pic.png" %}">
+            <img src="{{user.profile.user_image.url}}">
             <div>
                 <p>{{ post.author.username }}</p>
                 {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
                 <span>{{ post.date_posted|date:"F j, Y, h:i a" }}</span>
             </div>
         </div>
-        <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+        {% if post.author == user %}
+        <div class="menu-container menu{{ post.id }}">
+            <a class="menu-icon" onclick="toggleDropdown('menu{{ post.id }}')">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu menu{{ post.id }}-dropdown">
+            
+                <a href="{% url "post-update" post.pk %}">Update Post</a>
+                <a href="{% url "post-delete" post.pk %}">Delete Post</a>
+            </div>
+        </div>
+        {% endif %}
     </div>
 
 
@@ -60,9 +71,7 @@
             <a href="{% url "post-detail" post.pk%}"><div><img src="{% static "posts/images/comments.png" %}">{{ post.comments.count }}</div></a>
             <div><img src="{% static "posts/images/share.png" %}"> 20</div>
         </div>
-        <div class="post-profile-icon">
-            <img src="{% static "posts/images/profile-pic.png" %}"> <i class="fas fa-caret-down"></i>
-        </div>
+        
     </div>
     
 
@@ -75,7 +84,7 @@
     <form action="{% url "comment-post" post.pk %}" method='post' enctype="multipart/form-data">
         {% csrf_token %}
     <div class="post-input-container comments-input">
-        <textarea rows="3" placeholder="Add a comment" name="text"></textarea>
+        <textarea rows="3" placeholder="Add a comment" name="text" class="post-text"></textarea>
         <button type="submit" class="hide-button"><i class="fa-solid fa-paper-plane fa-lg" style="color: #1876f2;"></i></button>
 
     </div>
@@ -88,14 +97,23 @@
 
         <div class="post-row">
             <div class="user-profile">
-                <img src="{% static "posts/images/profile-pic.png" %}">
+                <img src="{{comment.author.profile.user_image.url}}">
                 <div>
                     <p>{{ comment.author.username }}</p>
                     {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
                     <span>{{ comment.created_at|date:"F j, Y, h:i a" }}</span>
                 </div>
             </div>
-            <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                    {% if comment.author == user %}
+                    <div class="menu-container menu{{ comment.id }}">
+                        <a class="menu-icon" onclick="toggleDropdown('menu{{ comment.id }}')">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu menu{{ comment.id }}-dropdown">
+                            <a href="{% url "comment-delete" comment.id %}">Delete Comment</a>
+                        </div>
+                    </div>
+                    {% endif %}
         </div>
 
         <p class="post-text">{{ comment.text }}</p>

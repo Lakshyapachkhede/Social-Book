@@ -1,0 +1,45 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% block content %}
+{% load custom_filters %}
+
+<div class="theme-list">
+    
+
+    {% for notification in notifications %}
+    <div class="theme-list-item">
+
+        <div class="theme-list-row">
+            <div class="theme-list-profile">
+                <img src="{{notification.sender.profile.user_image.url}}">
+                
+                <p>{{ notification.sender.username }}</p>
+
+                    </div>
+            <p class="post-text ml-10">
+                {% if notification.notification_type == "LK" %}
+                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> liked your <a class="blue-link-l" href="{% url "post-detail" notification.id %}">post</a>
+
+                {% elif notification.notification_type == "FR" %}
+                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> send you friend request</a>
+
+                {% elif notification.notification_type == "CM" %}
+                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> commented on your <a class="blue-link-l" href="{% url "post-detail" notification.id %}">post</a>
+
+                {% elif notification.notification_type == "AC" %}
+                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> accepted your friend request</a>
+                {% endif %}
+                                   
+            </p>   
+
+  
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+
+</div>
+
+{% endblock content %}

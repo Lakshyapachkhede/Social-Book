@@ -8,13 +8,12 @@
 
     <div class="post-row">
         <div class="user-profile">
-            <img src="{% static "posts/images/profile-pic.png" %}">
+            <img src="{{ user.profile.user_image.url }}">
             <div>
                 <p>{{ user.username }}</p>
                 <span>{% now "F j, Y, h:i a" %}</span>
             </div>
         </div>
-        <a href="#"><i class="fas fa-ellipsis-v"></i></a>
     </div>
 
 
@@ -28,7 +27,7 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="post-input-container comments-input update-input">
-            <textarea rows="3" class="post-text" name="caption" placeholder="Write Here">{{ object.caption }}</textarea>
+            <textarea rows="3" class="post-text" name="caption" placeholder="Write Here" required>{{ object.caption }}</textarea>
             <div class="post-input-buttons">
                 <label for="id_images">
                     <img class="add-images-icon" src="{% static "posts/images/photo.png" %}">
@@ -37,7 +36,7 @@
             </div>
         </div>
         <div class="images-input-container">
-        <input class="d-none" type="file" id="id_images" name="images" multiple />
+        <input class="d-none" type="file" id="id_images" name="images" multiple required/>
         </div>
 
     </form>

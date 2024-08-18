@@ -1,6 +1,7 @@
 .post-detail-container{
     margin: 0;
     flex-basis: 60%;
+    height: fit-content;
 }
 .post-comments-container{
     flex-basis: 35%;
@@ -48,7 +49,7 @@
 }
 
 .delete-button {
-    margin: auto;
+    display: inline-block;
     cursor: pointer;
     padding: 5px 10px;
     border: 1px solid red;
@@ -57,7 +58,7 @@
     border-radius: 4px;
 }
 .cancel-button{
-    margin: auto;
+    display: inline-block;
     cursor: pointer;
     padding: 5px 10px;
     border: 1px solid #9a9a9a;
@@ -69,6 +70,13 @@
 
 .mt-3{
     margin-top: 3px;
+}
+.mt-14{
+    margin-top: 14px;
+}
+
+.ml-10{
+    margin-left: 10px;
 }
 
 @media (max-width:900px) {

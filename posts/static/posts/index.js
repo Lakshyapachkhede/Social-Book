@@ -31,3 +31,19 @@ else {
 
 
 
+function toggleDropdown(menuClass) {
+    const dropdown = document.querySelector(`.${menuClass}-dropdown`);
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+}
+
+
+window.onclick = function(event) {
+    if (!event.target.closest('.menu-container')) {
+        const dropdowns = document.querySelectorAll('.dropdown-menu');
+        dropdowns.forEach(dropdown => {
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            }
+        });
+    }
+}

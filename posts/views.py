@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from .models import Post, Image, Like, Comment
 from .forms import CommentForm
@@ -90,6 +91,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 
 @require_POST
+@login_required
 def like_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
     user = request.user
@@ -105,7 +107,8 @@ def like_post(request, pk):
         'liked':liked,
         'likes_count':post.likes.count(),
     })
-    
+
+@login_required  
 def add_comment(request, pk):
     post = Post.objects.get(id=pk)
     form = CommentForm(request.POST)
@@ -118,5 +121,14 @@ def add_comment(request, pk):
     return redirect('post-detail', pk=pk)
 
 
+
+@login_required
+def delete_comment(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    
+    if comment.author == request.user:
+        post_pk = comment.post.pk
+        comment.delete()
+        return redirect('post-detail', pk=post_pk)
 
 
