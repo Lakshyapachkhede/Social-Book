@@ -78,7 +78,10 @@ nav {
     align-items: center;
     padding: 0 15px;
 }
-
+.search-box form{
+    display: flex;
+    align-items: center;
+}
 .search-box img {
     width: 18px;
 }
@@ -94,6 +97,10 @@ nav {
 .online {
     position: relative;
 }
+.notification-red{
+    position: relative;
+}
+
 
 .online::after {
     content: '';
@@ -106,7 +113,17 @@ nav {
     top: 0;
     right: 0;
 }
-
+.notification-red::after{
+    content: '';
+    width: 5px;
+    height: 5px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: rgb(255, 0, 0);
+    position: absolute;
+    right: 17px;
+ 
+}
 .main {
     display: flex;
     justify-content: space-between;
@@ -181,7 +198,7 @@ nav {
 
 }
 
-.right-sidebar h4 {
+.right-sidebar h4, h4 {
     font-weight: 600;
     font-size: 16px;
 }
@@ -258,7 +275,7 @@ nav {
     top: unset;
     bottom: 5px;
 }
-
+/* 
 .story-gallery {
     display: flex;
     justify-content: space-between;
@@ -322,7 +339,7 @@ nav {
     border: 0;
     width: 35px;
 
-}
+} */
 
 .write-post-container {
     width: 100%;
@@ -435,7 +452,7 @@ nav {
 }
 
 .post-img {
-    width: 100%;
+    /* width: 100%; */
     border-radius: 4px;
     margin-bottom: 5px;
     max-height: 500px;
@@ -627,7 +644,7 @@ nav {
     margin-top: 12px;
 }
 
-.pd-right button {
+.pd-right button, .pd-right a {
     background: #1876f2;
     border: 0;
     outline: 0;
@@ -638,14 +655,15 @@ nav {
     border-radius: 3px;
     margin-left: 10px;
     cursor: pointer;
+    text-decoration: none;
 }
 
-.pd-right button img {
+.pd-right a img, .pd-right a img {
     height: 15px;
     margin-right: 10px;
 }
 
-.pd-right button:first-child {
+.pd-right a:first-child {
     background: #e4e6eb;
     color: #000;
 }
@@ -654,17 +672,17 @@ nav {
     text-align: right;
 }
 
-.pd-right a {
+/* .pd-right a {
     background: #e4e6eb;
     border-radius: 3px;
     padding: 12px;
     display: inline-flex;
     margin-top: 30px;
-}
+} */
 
-.pd-right a img {
+/* .pd-right a img {
     width: 20px;
-}
+} */
 
 .profile-info {
     display: flex;
@@ -765,24 +783,19 @@ nav {
     grid-gap: 10px;
     margin-top: 15px;
 }
-.friends-box div{
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
 
-}
 .friends-box div img{ 
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+
     cursor: pointer;
     padding-bottom: 20px;
 }
+.friends-box div{
 
-.friends-box div {
     position: relative;
 
 }
+
 
 .friends-box p{
     position: absolute;
@@ -1074,6 +1087,9 @@ nav {
     }
     .theme-list{
         margin: 13px 5%;
+    }
+    .notification-red::after{
+        right: 10px;
     }
 
 }

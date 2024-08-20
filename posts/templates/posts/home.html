@@ -60,12 +60,13 @@
                 <div class="post-row">
                     <div class="user-profile">
       
-                        <img src="{{ post.author.profile.user_image.url }}">
+                        <a href="{% url "profile" post.author.username %}"><img src="{{ post.author.profile.user_image.url }}"></a>
  
                         <div>
                             <p>{{ post.author.username }}</p>
                             {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
-                            <span>{{ post.date_posted|date:"F j, Y, h:i a" }}</span>
+                            {% comment %} <span>{{ post.date_posted|date:"F j, Y, h:i a" }}</span> {% endcomment %}
+                            <span>{{ post.date_posted|timesince }} ago</span>
                         </div>
                     </div>
                     {% if post.author == user %}

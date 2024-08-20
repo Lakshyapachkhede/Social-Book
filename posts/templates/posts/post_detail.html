@@ -8,7 +8,7 @@
 
     <div class="post-row">
         <div class="user-profile">
-            <img src="{{user.profile.user_image.url}}">
+            <img src="{{post.author.profile.user_image.url}}">
             <div>
                 <p>{{ post.author.username }}</p>
                 {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
@@ -101,7 +101,7 @@
                 <div>
                     <p>{{ comment.author.username }}</p>
                     {% comment %} <span>June 24 2021, 13:40 pm</span> {% endcomment %}
-                    <span>{{ comment.created_at|date:"F j, Y, h:i a" }}</span>
+                    <span>{{ comment.created_at|timesince }} ago</span>
                 </div>
             </div>
                     {% if comment.author == user %}

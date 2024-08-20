@@ -1,0 +1,30 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% block content %}
+{% load custom_filters %}
+
+<div class="theme-list">
+    <h4>Search results for "{{ query }}"</h4>
+
+    {% for user in users %}
+    <div class="theme-list-item">
+
+        <div class="theme-list-row">
+            <div class="theme-list-profile">
+                <a href="{% url "profile" user.username %}"><img src="{{user.profile.user_image.url}}"></a>
+                
+                <p>{{ user.username }}</p>
+
+            </div>
+
+        </div>
+       
+    </div>
+
+    {% endfor %}
+
+
+
+</div>
+
+{% endblock content %}

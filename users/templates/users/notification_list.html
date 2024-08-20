@@ -14,26 +14,26 @@
                 <img src="{{notification.sender.profile.user_image.url}}">
                 
                 <p>{{ notification.sender.username }}</p>
+                <span class="post-text ml-10">{{ notification.timestamp|timesince }} ago</span>
 
-                    </div>
-            <p class="post-text ml-10">
-                {% if notification.notification_type == "LK" %}
-                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> liked your <a class="blue-link-l" href="{% url "post-detail" notification.id %}">post</a>
+            </div>
 
-                {% elif notification.notification_type == "FR" %}
-                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> send you friend request</a>
-
-                {% elif notification.notification_type == "CM" %}
-                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> commented on your <a class="blue-link-l" href="{% url "post-detail" notification.id %}">post</a>
-
-                {% elif notification.notification_type == "AC" %}
-                <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> accepted your friend request</a>
-                {% endif %}
-                                   
-            </p>   
-
-  
         </div>
+        <p class="post-text ml-10">
+            {% if notification.notification_type == "LK" %}
+            <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> liked your <a class="blue-link-l" href="{% url "post-detail" notification.object_id %}">post</a>
+
+            {% elif notification.notification_type == "FR" %}
+            <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> send you friend request</a>
+
+            {% elif notification.notification_type == "CM" %}
+            <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> commented on your <a class="blue-link-l" href="{% url "post-detail" notification.object_id %}">post</a>
+
+            {% elif notification.notification_type == "AC" %}
+            <a class="blue-link-l" href="{% url "profile" notification.sender.username %}">{{ notification.sender.username }}</a> accepted your friend request</a>
+            {% endif %}
+                               
+        </p>   
     </div>
 
     {% endfor %}

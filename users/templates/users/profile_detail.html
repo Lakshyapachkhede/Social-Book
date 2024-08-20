@@ -34,10 +34,29 @@
 
         </div>
         <div class="pd-right">
-            <button type="button"><img src="{% static "posts/images/add-friends.png" %}"> Friend</button>
-            <button type="button"><img src="{% static "posts/images/message.png" %}"> Message</button>
+        {% if user.profile != profile %}
+            {% if user.profile not in profile.get_friends %}
+                {% if friend_request %}
+                <a type="button" href="{% url "delete-friend-request" friend_request.id %}"><img src="{% static "posts/images/add-friends.png" %}"> Delete</a>
+
+                {% else %}
+
+                    {% if friend_request_received %}
+                    <a type="button" href="{% url "accept-friend-request" friend_request_received.id %}"><img src="{% static "posts/images/add-friends.png" %}"> Accept</a>
+                    <a type="button" href="{% url "reject-friend-request" friend_request_received.id %}"><img src="{% static "posts/images/add-friends.png" %}"> Reject</a>
+                    
+
+                    {% else %}
+                    <a type="button" href="{% url "send-friend-request" profile.user.id %}"><img src="{% static "posts/images/add-friends.png" %}"> Friend</a>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                <a type="button" href="{% url "un-friend" profile.user.id %}"><img src="{% static "posts/images/add-friends.png" %}"> un friend</a>
+            {% endif %}
+        {% endif %}
             <br>
-            <a href="#"><img src="{% static "posts/images/more.png" %}"></a>
+        
+            {% comment %} <a href="#"><img src="{% static "posts/images/more.png" %}"></a> {% endcomment %}
         </div>
     </div>
 
@@ -214,6 +233,8 @@
 
 
 </div>
+
+
 
 
 {% endblock content %}

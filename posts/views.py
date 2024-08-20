@@ -13,6 +13,9 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from users.models import Notification
+from django.contrib.contenttypes.models import ContentType
+
 
 class PostListView(LoginRequiredMixin, ListView):
     template_name = 'posts/home.html'
@@ -102,6 +105,14 @@ def like_post(request, pk):
     else:
         Like.objects.create(post=post, author=user)
         liked = True
+        if request.user != post.author:
+            Notification.objects.create(
+                sender=request.user,
+                receiver=post.author,
+                notification_type='LK',
+                content_type=ContentType.objects.get_for_model(Post),
+                object_id=post.id
+            )
 
     return JsonResponse({
         'liked':liked,
@@ -117,6 +128,14 @@ def add_comment(request, pk):
         comment.post = post
         comment.author = request.user
         comment.save()
+        if request.user != post.author:
+            Notification.objects.create(
+                sender=request.user,
+                receiver=post.author,
+                notification_type='CM',
+                content_type=ContentType.objects.get_for_model(Post),
+                object_id=post.id
+            )
     
     return redirect('post-detail', pk=pk)
 

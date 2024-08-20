@@ -26,7 +26,7 @@
             </a>
             <ul>
                 <li>
-                    <a href="{% url "notifications" %}"><img src="{% static "posts/images/notification.png" %}"></a>
+                    <a href="{% url "notifications" %}" class="notification-red"><img src="{% static "posts/images/notification.png" %}"></a>
                 </li>
                 <li>
                     <img src="{% static "posts/images/inbox.png" %}">
@@ -38,8 +38,10 @@
         </div>
         <div class="nav-right">
             <div class="search-box">
+                <form method="GET" action="{% url 'search' %}">
                 <img src="{% static "posts/images/search.png" %}">
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" name="q" required>
+                </form>
             </div>
             <div class="nav-user-icon online" onclick="settingsMenuToogle()">
                 <img src="{{ user.profile.user_image.url }}">

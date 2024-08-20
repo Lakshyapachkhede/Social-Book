@@ -22,7 +22,7 @@ class Profile(models.Model):
     
     def add_friend(self, profile):
         """Send a friend request to another user."""
-        friend_request, created = FriendRequest.objects.get_or_create(from_user=self.user, to_user=profile.user)
+        friend_request = FriendRequest.objects.create(from_user=self.user, to_user=profile.user)
         return friend_request
     
     def remove_friend(self, profile):
@@ -56,18 +56,15 @@ class FriendRequest(models.Model):
         """"Accept a friend request"""
         self.to_user.profile.friends.add(self.from_user.profile)
         self.from_user.profile.friends.add(self.to_user.profile)
-        self.is_active = False
-        self.save()
+        self.delete()
 
     def reject(self):
         """"Rejects a friend Request"""
-        self.is_active = False
-        self.save()
+        self.delete()
 
     def cancel(self):
         """cancels a friend request"""
-        self.is_active = False
-        self.save()
+        self.delete()
 
     def __str__(self):
         return f"request from {self.from_user.username} to {self.to_user.username}"
@@ -87,6 +84,10 @@ class Notification(models.Model):
     notification_type = models.CharField(max_length=2, choices=NOTIFICATION_TYPES)
     timestamp = models.DateTimeField(auto_now_add=True)
     
+    
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True, blank=True)
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    related_object = GenericForeignKey('content_type', 'object_id')
 
     def __str__(self):
         return f"notification from {self.sender} to {self.receiver} - {self.notification_type}"
