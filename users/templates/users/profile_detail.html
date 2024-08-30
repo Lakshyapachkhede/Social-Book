@@ -64,7 +64,13 @@
 
     <div class="profile-info">
         <div class="info-col">
-
+            {% if not profile.works and not profile.education and not profile.location and not profile.home  %}
+            {% if profile.user == request.user %}
+            <div class="profile-intro">
+                <a href="{% url "profile-update" profile.user.username%}" class="blue-link-l">update your profile</a>
+            </div>
+                {% endif %}
+            {% else %}
             <div class="profile-intro">
                 <h3>Intro</h3>
                 <p class="intro-text">{{ profile.intro }} <img src="{% static "posts/images/feeling.png" %}"></p>
@@ -79,11 +85,12 @@
 
 
             </div>
-
+            {% endif %}
+            {% if post_photos|length > 0 %}
             <div class="profile-intro">
                 <div class="title-box">
                     <h3>Photos</h3>
-                    <a href="#">All Photos</a>
+      
                 </div>
        
                 <div class="photo-box">
@@ -94,11 +101,12 @@
                 </div>
 
             </div>
-
+            {% endif %}
+            {% if profile.friends.count > 0 %}
             <div class="profile-intro">
                 <div class="title-box">
                     <h3>Friends</h3>
-                    <a href="#">All Friends</a>
+                    <a href="{% url "friends-list" profile.user.username %}">All Friends</a>
                 </div>
                 
                 <p>{{ profile.friends.count }} {% if profile.user.username != user.username %} ({{ mutual_friends_count }} mutual){% endif %}</p>
@@ -116,6 +124,7 @@
                 </div>
 
             </div>
+            {% endif %}
 
 
 

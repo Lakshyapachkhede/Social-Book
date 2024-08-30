@@ -1,0 +1,46 @@
+{% extends "posts/base.html" %}
+{% load static %}
+{% block content %}
+{% load custom_filters %}
+
+<div class="theme-list">
+    
+
+    {% for friend in friends %}
+    <div class="theme-list-item">
+
+        <div class="theme-list-row">
+            <div class="theme-list-profile">
+                <img src="{{friend.user_image.url}}">
+                
+                <p>{{ friend.user.username }}</p>
+                
+
+            </div>
+
+        </div>
+        {% if user == profile.user %}
+        <div class="menu-container menu{{ friend.user.id }}">
+            <a class="menu-icon" onclick="toggleDropdown('menu{{ friend.user.id }}')">
+                <i class="fas fa-ellipsis-v"></i>
+            </a>
+            <div class="dropdown-menu menu{{ friend.user.id }}-dropdown">
+            
+                <a href="{% url "un-friend" friend.user.id %}">Un friend</a>
+
+            </div>
+        </div>
+
+
+        {% endif %}
+
+
+    </div>
+
+    {% endfor %}
+
+
+
+</div>
+
+{% endblock content %}

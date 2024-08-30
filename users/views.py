@@ -168,4 +168,7 @@ def search(request):
 
     return render(request, 'users/search.html', {'users': users, 'query': query})
 
-
+def friends_list(request, username):
+    profile = get_object_or_404(User, username=username).profile
+    friends = profile.get_friends()
+    return render(request, 'users/friends_list.html', {'friends':friends, 'profile':profile})

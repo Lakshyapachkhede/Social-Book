@@ -9,7 +9,7 @@
             <h2>Are you sure you want to delete the post "{{ object.caption }}"</h2>
             <div>
                 <button type="submit mt-3" class="delete-button">Yes, Delete</button>
-                <button class="cancel-button mt-3" href="{% url "post-detail" object.id %}">Cancel</button>
+                <button class="button mt-3" href="{% url "post-detail" object.id %}">Cancel</button>
             </div>
         </form>
     </div>

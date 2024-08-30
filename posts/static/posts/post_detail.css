@@ -57,16 +57,7 @@
     background: transparent;
     border-radius: 4px;
 }
-.cancel-button{
-    display: inline-block;
-    cursor: pointer;
-    padding: 5px 10px;
-    border: 1px solid #9a9a9a;
-    color: #626262;
-    background: transparent;
-    border-radius: 4px;
-    text-decoration: none;
-}
+
 
 .mt-3{
     margin-top: 3px;

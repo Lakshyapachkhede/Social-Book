@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+import os
+from PIL import Image as PilImage
 
 
 
@@ -19,6 +21,34 @@ class Profile(models.Model):
 
     def __str__(self):
         return f"{self.user.username}'s profile"
+    
+    def save(self, *args, **kwargs):
+        if self.pk:
+            old_profile_image = Profile.objects.get(pk=self.pk).user_image
+            old_banner_image = Profile.objects.get(pk=self.pk).banner_image
+            
+            if old_profile_image != self.user_image and old_profile_image != 'default.png':
+                if os.path.isfile(old_profile_image.path):
+                    os.remove(old_profile_image.path)
+
+            if old_banner_image != self.banner_image and old_banner_image != 'default-banner':
+                if os.path.isfile(old_banner_image.path):
+                    os.remove(old_banner_image.path)
+
+        super().save(*args, **kwargs)
+
+        profile_image = PilImage.open(self.user_image.path)
+        if profile_image.height > 300:
+            output_size = (292, 292)
+            profile_image.thumbnail(output_size)
+            profile_image.save(self.user_image.path)
+
+        banner_image = PilImage.open(self.banner_image.path)
+        if banner_image.height > 600:
+            output_size = (1905, 601)
+            banner_image.thumbnail(output_size)
+            banner_image.save(self.banner_image.path)
+
     
     def add_friend(self, profile):
         """Send a friend request to another user."""

@@ -44,18 +44,18 @@
         {% endif %}
 
           <p class="recover">
-            <a href="#">Recover Password</a>
+            <a href="{% url "password_reset" %}">Recover Password</a>
           </p>
           <button type="submit">Sign in</button>
         </form>
-        <p class="or">
+        {% comment %} <p class="or">
           ----- or continue with -----
         </p>
         <div class="icons">
           <i class="fab fa-google"></i>
           <i class="fab fa-github"></i>
           <i class="fab fa-facebook"></i>
-        </div>
+        </div> {% endcomment %}
         <div class="not-member">
           Not a member? <a href="{% url "register" %}">Register Now</a>
         </div>

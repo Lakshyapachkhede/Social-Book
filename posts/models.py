@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
+from PIL import Image as PilImage
 
 
 class Post(models.Model):
@@ -10,11 +12,28 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.caption
-
+    
+    def delete(self, *args, **kwargs):
+        self.images.all().delete()
+        super().delete(*args, **kwargs)
+    
 
 class Image(models.Model):
     image = models.ImageField(upload_to='posts/images')
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = PilImage.open(self.image.path)
+        max_size = (1053, 569)
+
+        img.thumbnail(max_size, PilImage.ANTIALIAS)
+
+        img.save(self.image.path)
+
+    def delete(self, *args, **kwargs):
+        self.image.delete(save=False)
+        super().delete(*args, **kwargs)
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
