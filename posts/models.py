@@ -10,6 +10,7 @@ class Post(models.Model):
     caption = models.TextField()
     images = models.ManyToManyField("Image", related_name="photo_post", blank=True)
 
+
     def __str__(self) -> str:
         return self.caption
     
@@ -17,6 +18,12 @@ class Post(models.Model):
         self.images.all().delete()
         super().delete(*args, **kwargs)
     
+class Share(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="shares")
+    shared_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    shared_at = models.DateTimeField(auto_now_add=True)
+
+
 
 class Image(models.Model):
     image = models.ImageField(upload_to='posts/images')

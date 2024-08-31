@@ -56,7 +56,6 @@
 
         {% for post in posts %}
             <div class="post-container">
-
                 <div class="post-row">
                     <div class="user-profile">
       
@@ -120,11 +119,11 @@
                             {% else %}
                                 <img src="{% static "posts/images/like.png" %}" id="like-icon-{{post.id}}" class="like-icon" data-liked="false">
                             {% endif %}
-                            <span id="likes-count-{{post.id}}">{{ post.likes.count }}</span>
+                            <span id="likes-count-{{post.id}}">{{ post.total_likes }}</span>
                         </div>
                                             
                         <a href="{% url "post-detail" post.pk%}"><div><img src="{% static "posts/images/comments.png" %}">{{ post.comments.count }}</div></a>
-                        <div><img src="{% static "posts/images/share.png" %}"> 20</div>
+                        <div class="share-btn" data-post-id={{post.id}}><img src="{% static "posts/images/share.png" %}">  <span id="share-count-{{post.id}}">{{ post.total_shares }}</span></div>
                     </div>
                     
                 </div>
