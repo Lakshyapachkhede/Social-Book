@@ -224,7 +224,7 @@
                         </div>
                                             
                         <a href="{% url "post-detail" post.pk%}"><div><img src="{% static "posts/images/comments.png" %}">{{ post.comments.count }}</div></a>
-                        <div><img src="{% static "posts/images/share.png" %}"> 20</div>
+                        <div class="share-btn" data-post-id={{post.id}}><img src="{% static "posts/images/share.png" %}">  <span id="share-count-{{post.id}}">{{ post.shares.count }}</span></div>
                     </div>
                     
                 </div>

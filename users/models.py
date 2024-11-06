@@ -31,7 +31,7 @@ class Profile(models.Model):
                 if os.path.isfile(old_profile_image.path):
                     os.remove(old_profile_image.path)
 
-            if old_banner_image != self.banner_image and old_banner_image != 'default-banner':
+            if old_banner_image != self.banner_image and old_banner_image != 'default-banner.jpg':
                 if os.path.isfile(old_banner_image.path):
                     os.remove(old_banner_image.path)
 
