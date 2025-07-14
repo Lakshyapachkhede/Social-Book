@@ -1,9 +1,11 @@
 ## Home Page
 ![Game Activity](./screenshots/1.jpg)
 ## Home Page - Dark Mode
-![Room Creation](./screenshots/4.jpg)
+![Home Page Dark Mode](./screenshots/4.png)
+## Post Page
+![Post Page](./screenshots/3.jpg)
 ## Profile Page
-![Home Screen](./screenshots/5.jpg)
+![Profile Page](./screenshots/5.png)
 ## Login Page
-![Home Screen](./screenshots/7.jpg)
+![Login Page](./screenshots/7.png)
 
